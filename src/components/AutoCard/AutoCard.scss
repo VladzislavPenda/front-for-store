@@ -1,0 +1,44 @@
+.card {
+    width: 100%;
+    height: 200px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    
+}
+
+.card:last-child {
+    margin: 0;
+}
+
+.product_name {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card_picture {
+    margin-right: 20px;
+}
+
+.card_image {
+    width: 230px;
+    height: 180px;
+}
+
+.product_information {
+    
+}
+
+.product_information_additional {
+    display: flex;
+    margin-right: 20px;
+    font-family: "Open Sans", sans-serif;
+}
+
+.product_price {
+    font-size: 20px;
+    font-weight: bold;
+}
