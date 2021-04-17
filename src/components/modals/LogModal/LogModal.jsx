@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import jwt_decode from "jwt-decode"
 import { sendLogInf } from '../../../api'
 import './LogModal.scss'
 
@@ -29,8 +30,11 @@ const LogModal = ({ close }) => {
 
     const submitHandle = async (event) => {
         event.preventDefault()
-        console.log(logInf)
-        console.log(await sendLogInf(logInf))
+        const data = await sendLogInf(logInf)
+        const token = data.data.token
+        const userInf = jwt_decode(token)
+        localStorage.setItem("role", userInf[Object.keys(userInf)[1]])
+        close()
     }
 
     return (
@@ -40,17 +44,12 @@ const LogModal = ({ close }) => {
                     Login
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
-                    
-
-                
                     <div className="modal_input_data_container_element">
                         <input onChange={(event) => changeHandler("Username", event.target.value)} className="modal_registration_input" type="text" required placeholder=" Username" />
                     </div>
                     <div className="modal_input_data_container_element">
                         <input onChange={(event) => changeHandler("password", event.target.value)} className="modal_registration_input" type="password" required placeholder=" Password" />
                     </div>
-                
-
                     
                     <div className="modal_button">
                         <button className="modal_registration_account_button">Log into</button>

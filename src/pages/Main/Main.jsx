@@ -3,28 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { fetchCarsList } from '../../api'
 import AutoCard from '../../components/AutoCard/AutoCard'
 import './Main.scss'
+import Filter from '../../components/FilterBar/FilterBar'
 
-const Main = () => {
-    const [carsList, setCarsList] = useState([])
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setCarsList(await fetchCarsList())
-
-        }
-        fetchData()
-    }, [])
+const Main = ({ carsList, setCarsList }) => {
+    
 
     return (
         <div className="main">
             <div className="cards-container">
                 {carsList.map(el => {
                     return <AutoCard key={el.modelId} inf={el} />
+                            
                 })}
             </div>
-            <div className="filters_container">
-                
-            </div>
+            <Filter setCarsList={setCarsList}/>
         </div>
     )
 }

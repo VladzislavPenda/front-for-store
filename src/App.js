@@ -7,12 +7,24 @@ import {
 } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 import Main from './pages/Main/Main';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RegModal from './components/modals/RegModal/RegModal';
 import LogModal from './components/modals/LogModal/LogModal';
+import { fetchCarsList } from './api';
+import Car from './pages/Car/Car';
 
 
 function App() {
+  const [carsList, setCarsList] = useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCarsList(await fetchCarsList())
+    }
+    fetchData()
+  }, [])
+
+
   const [loginOpen, setLoginOpen] = useState(false)
   const [regOpen, setRegOpen] = useState(false)
 
@@ -27,11 +39,12 @@ function App() {
   return (
     <Router>
       <NavBar reg={toggleReg} login={toggleLogin} />
-      <Switch>
-        <Route path="/">
-          <Main/>
+        <Route path="/" exact>
+          <Main carsList={carsList} setCarsList={setCarsList} />
         </Route>
-      </Switch>
+        <Route path="/car/:id">
+          <Car carsList={carsList} />
+        </Route>
       {loginOpen && <LogModal close={toggleLogin} />}
       {regOpen && <RegModal close={toggleReg} />}
     </Router>

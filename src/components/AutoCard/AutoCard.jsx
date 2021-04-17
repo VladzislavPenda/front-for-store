@@ -1,20 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './AutoCard.scss'
 // import 'D:/Study/C#/Tutorials/app/src/Pictures'
-const a = "/Pictures/"
-var b ="citroen_xsara_2000.jpg"
 
 const AutoCard = ({ inf }) => {
-    var stroka = a + inf.pathToPicture
+    
     return (
-        <div className="card">
+        <Link to={'/car/' + inf.modelId}  className="card">
             <div className="card_picture">
-                
-                <img className="card_image" src={stroka} alt="f"/>
+                <img className="card_image" src={"/Pictures/" + inf.pathToPicture} alt="f"/>
             </div>
             <div className="product_information">
                 <div className="product_name">
-                    {inf.markName} {inf.model}
+                    {inf.model}
                 </div>
                 <div className="product_information_additional">
                     Пробег: {inf.mileAge} Кузов: {inf.carcaseType} Год: {inf.year} Двигатель: {inf.engineType}
@@ -25,7 +23,7 @@ const AutoCard = ({ inf }) => {
                 
             </div>
             
-        </div>
+        </Link>
     )
 }
 
