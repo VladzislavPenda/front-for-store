@@ -16,17 +16,18 @@ import Car from './pages/Car/Car';
 
 function App() {
   const [carsList, setCarsList] = useState([])
+  const [role, setRole] = useState('')
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [regOpen, setRegOpen] = useState(false)
+
 
   useEffect(() => {
+    setRole(localStorage.getItem("role"))
     const fetchData = async () => {
       setCarsList(await fetchCarsList())
     }
     fetchData()
   }, [])
-
-
-  const [loginOpen, setLoginOpen] = useState(false)
-  const [regOpen, setRegOpen] = useState(false)
 
   const toggleLogin = () => {
     setLoginOpen(!loginOpen)
@@ -38,15 +39,15 @@ function App() {
 
   return (
     <Router>
-      <NavBar reg={toggleReg} login={toggleLogin} />
+      <NavBar setRole={setRole} role={role} reg={toggleReg} login={toggleLogin} />
         <Route path="/" exact>
           <Main carsList={carsList} setCarsList={setCarsList} />
         </Route>
         <Route path="/car/:id">
-          <Car carsList={carsList} />
+          <Car role={role} />
         </Route>
-      {loginOpen && <LogModal close={toggleLogin} />}
-      {regOpen && <RegModal close={toggleReg} />}
+      {loginOpen && <LogModal setRole={setRole} close={toggleLogin} />}
+      {regOpen && <RegModal setRole={setRole} close={toggleReg} />}
     </Router>
   );
 }

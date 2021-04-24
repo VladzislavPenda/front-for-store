@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { useHistory } from 'react-router'
 import { useState } from 'react';
 import { fetchCar, fetchSameCars } from '../../api'
 import { Link } from 'react-router-dom'
 import './Car.scss'
 
-const Car = () => {
+const Car = ({ role }) => {
 
     const [carsList, setCarsList] = useState([])
     const [sameCarsList, setSameCarsList] = useState([])
     const history = useHistory()
-    const id = history.location.pathname.slice(5)
+    const [id, setId] = useState(history.location.pathname.slice(5))
     useEffect(() => {
         const fetchData = async () => {
             setCarsList(await fetchCar(id))
-            console.log('hi')
         }
         fetchData()
     }, [])
@@ -31,7 +30,13 @@ const Car = () => {
         findSameCars()
     }, [carsList])
 
-    console.log('09090')
+    const OnClick = useCallback((el) => {
+        setId(el.modelId)
+        const fetchData = async () => {
+            setCarsList(await fetchCar((el.modelId)))
+        }
+        fetchData()
+    }, [setId, setCarsList])
 
     return (
         <div className="car_container_main">
@@ -42,12 +47,17 @@ const Car = () => {
                 <div className="car_info">
                     <img className="auto_image" src={"/Pictures/" + carsList.pathToPicture} alt="" />
                     <div className="full_technical_info">
-                        <p className="params_object">{carsList.price}$</p>
-                        <p>Трансмиссия: {carsList.transmission}</p>
-                        <p>Привод: {carsList.driveType}</p>
-                        <p>Двигатель: {carsList.engineType}</p>
-                        <p>Пробег: {carsList.mileAge} км</p>
-                        <p>Тип кузова: {carsList.carcaseType}</p>
+                        <div>
+                            <p className="params_object">{carsList.price}$</p>
+                            <p>Трансмиссия: {carsList.transmission}</p>
+                            <p>Привод: {carsList.driveType}</p>
+                            <p>Двигатель: {carsList.engineType}</p>
+                            <p>Пробег: {carsList.mileAge} км</p>
+                            <p>Тип кузова: {carsList.carcaseType}</p>
+                        </div>
+                        {
+                            <div className="basket-button">Добавить в корзину</div>
+                        }
                     </div>
 
                 </div>
@@ -62,13 +72,12 @@ const Car = () => {
                 </div>
                 <div className="same_cars_container">
                     {
-                        
-                        sameCarsList.length && 
+                        sameCarsList.length &&
                         sameCarsList.map((el) => {
                             return (
-                                <Link to={'/car/' + el.modelId}  className="car_container" key={el.modelId}>
-                                    <div className="car_image">
-                                        <img className="image" src={"/Pictures/" + el.pathToPicture} alt=""/>
+                                <Link to={'/car/' + el.modelId} className="car_container" key={el.modelId}>
+                                    <div className="car_image" onClick={() => { OnClick(el) }}>
+                                        <img className="image" src={"/Pictures/" + el.pathToPicture} alt="" />
                                     </div>
                                     <div className="same_car_info">
                                         <p className="model">{el.model}</p>
@@ -77,10 +86,10 @@ const Car = () => {
                                 </Link>
                             )
                         })
-                        
+
                     }
                 </div>
-                
+
             </div>
         </div>
     )

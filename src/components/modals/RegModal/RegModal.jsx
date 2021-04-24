@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { sendRegInf } from '../../../api'
 import './RegModal.scss'
 
-const RegModal = ({ close }) => {
+const RegModal = ({ setRole, close }) => {
     const [regInf, setRegInf] = useState({
         'firstname': "",
         'lastname': "",
@@ -36,8 +36,7 @@ const RegModal = ({ close }) => {
 
     const submitHandle = async (event) => {
         event.preventDefault()
-        console.log(regInf)
-        console.log(await sendRegInf(regInf))
+        await sendRegInf(regInf)
     }
 
     return (

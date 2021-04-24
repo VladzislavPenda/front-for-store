@@ -41,8 +41,22 @@
     
 }
 
+.basket-button {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #7952b3;
+    color: white;
+    cursor: pointer;
+}
+
 .full_technical_info {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 60%;
 }
 

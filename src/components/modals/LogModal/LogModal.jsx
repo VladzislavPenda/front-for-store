@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode"
 import { sendLogInf } from '../../../api'
 import './LogModal.scss'
 
-const LogModal = ({ close }) => {
+const LogModal = ({ setRole, close }) => {
     const [logInf, setLogInf] = useState({
         'Username': "",
         'password': ""
@@ -34,6 +34,7 @@ const LogModal = ({ close }) => {
         const token = data.data.token
         const userInf = jwt_decode(token)
         localStorage.setItem("role", userInf[Object.keys(userInf)[1]])
+        setRole(userInf[Object.keys(userInf)[1]])
         close()
     }
 
