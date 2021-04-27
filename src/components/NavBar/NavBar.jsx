@@ -31,7 +31,7 @@ const NavBar = ({ setRole, role, reg, login }) => {
                             </div>
                             :
                             <div className="navbar__login">
-                                <b className="navbar__button">Admin Panel</b>
+                                <Link to={"/admin"}className="navbar__button">Admin Panel</Link>
                                 <b onClick={exit} className="navbar__button">Exit</b>
                             </div>
                 }

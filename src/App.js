@@ -12,6 +12,7 @@ import RegModal from './components/modals/RegModal/RegModal';
 import LogModal from './components/modals/LogModal/LogModal';
 import { fetchCarsList } from './api';
 import Car from './pages/Car/Car';
+import AdminPanel from './pages/AdminPanel/AdminPanel';
 
 
 function App() {
@@ -37,11 +38,15 @@ function App() {
     setRegOpen(!regOpen)
   }
 
+  
   return (
     <Router>
       <NavBar setRole={setRole} role={role} reg={toggleReg} login={toggleLogin} />
         <Route path="/" exact>
           <Main carsList={carsList} setCarsList={setCarsList} />
+        </Route>
+        <Route path="/admin" exact>
+          <AdminPanel />
         </Route>
         <Route path="/car/:id">
           <Car role={role} />

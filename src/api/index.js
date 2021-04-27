@@ -16,6 +16,16 @@ export const fetchCarsList = async () => {
     }
 }
 
+export const fetchParams = async (param) => {
+    try {
+        console.log(param)
+        const { data } = await axios.get(`https://localhost:44320/api/${param}`)
+        return data;
+    } catch (error) {
+        alert(error)
+    }
+}
+
 export const fetchCar = async (id) => {
     try {
         const { data } = await axios.get(`https://localhost:44320/api/shopModels/${id}`)
