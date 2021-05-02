@@ -4,20 +4,118 @@
 }
 
 .ap__content {
-    margin-top: 20px;
-    width: 85%;
+    
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
 .ap__types {
-    width: 40%;
+    width: 15%;
+    height: 400px;
+    // background-image: linear-gradient(180deg, #954fff  0%, #dcd1ec 90%);
+    
+    background-color: #823ee7;
 }
 
 .ap__var {
-    width: 60%;
+    width: 85%;
+    background-color: rgb(231, 225, 225);
 }
 
 .ap__param {
     
+}
+
+.ap__type_element {
+    margin: 10px;
+    color: rgb(219, 206, 206);
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+}
+
+.ap_type_text {
+    width: 100%;
+    height: 100%;
+    margin: 15px;
+    font-weight: bold;
+}
+:hover.ap__type_element {
+    cursor: pointer;
+    background-color: rgb(169, 169, 169, 0.3);
+}
+
+.ap__type_element :focus {
+    background-color: orange;
+}
+
+.record {
+    display: flex;
+    border-bottom: rgb(42, 134, 221) solid 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.record_info {
+    margin-left: 10px;
+    padding: 10px;
+    width: 90%;
+}
+.record_info:hover {
+    cursor: pointer;
+    background-color: blanchedalmond;
+    color:rgb(42, 134, 221)
+}
+
+.record :hover{
+    
+}
+
+.record_manager_buttons {
+    display: flex;
+}
+
+.manage_image_container {
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.manage_image {
+    width: 100%;
+    height: 100%;
+}
+
+.label_for_records {
+    display: flex;
+    margin: 10px
+}
+
+.op{
+    margin-top:  5px;
+}
+.label_text {
+    font-weight: bold;
+}
+
+.manage_image_container :hover {
+    background-color: rgb(214, 202, 202);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.manage_image_container :active {
+    border: rgb(184, 176, 176) solid 1px;
+}
+
+
+
+@media screen and (max-width: 1100px)
+{
+    .ap__types {
+        width: 30%;
+    }
 }
