@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { fetchParams } from '../../api'
 import './AdminPanel.scss'
 
-const AdminPanel = () => {
+const AdminPanel = ({setRole, role, update}) => {
     const [type, setType] = useState('shopCarcaseType')
+    // const [id, setId] = useState(1)
     const [paramList, setParamList] = useState([])
 
     useEffect(() => {
@@ -11,8 +12,13 @@ const AdminPanel = () => {
             setParamList(await fetchParams(type))
         }
         fetchData()
-        console.log(paramList)
+        
     }, [type])
+
+    const updateHandler = (id, typeValue) => {
+        // setId(param)
+        update(id, typeValue, type)
+      }
 
     const types = [
         {
@@ -68,7 +74,7 @@ const AdminPanel = () => {
 
                             <div className="record_manager_buttons">
                                 <div className="manage_image_container">
-                                    <img className="manage_image" src="/Pictures/Edit.png" alt="" />
+                                    <img onClick={() => updateHandler(el.id, el.type)} className="manage_image" src="/Pictures/Edit.png" alt="" />
                                 </div>
 
                                 <div className="manage_image_container">

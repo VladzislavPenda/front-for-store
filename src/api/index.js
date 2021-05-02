@@ -125,3 +125,16 @@ export const sendLogInf = async (logInf) => {
 
     }
 }
+
+export const sendUpdateInf = async (updateInf) => {
+    try {
+        const data = await axios.post("https://localhost:44320/api/", updateInf)
+        return data
+    } catch (error) {
+
+        alert(Object.keys(error.response.data).reduce((acc, el) => {
+            return acc + error.response.data[el][0] + '\n'
+        }, ''))
+
+    }
+}
