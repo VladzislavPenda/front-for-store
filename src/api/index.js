@@ -126,9 +126,9 @@ export const sendLogInf = async (logInf) => {
     }
 }
 
-export const sendUpdateInf = async (updateInf) => {
+export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     try {
-        const data = await axios.post("https://localhost:44320/api/", updateInf)
+        const data = await axios.put(`https://localhost:44320/api/${modifyingTable}/${id}`, updateInf)
         return data
     } catch (error) {
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import jwt_decode from "jwt-decode"
-import { sendLogInf } from '../../../api'
+import { sendUpdateInf } from '../../../api'
 import './UpdateModal.scss'
 
-const UpdateModal = ({ setRole, close, setId, setTypeValue, setType }) => {
+const UpdateModal = ({ setRole, close, setId, type, setType }) => {
     const [updateInf, setUpdateInf] = useState({
-        'Type': {setTypeValue}
+        'Type': {type}
     })
+
     const ref = useRef(null)
 
     useEffect(() => {
@@ -22,22 +22,16 @@ const UpdateModal = ({ setRole, close, setId, setTypeValue, setType }) => {
     }, [ref, close, updateInf])
 
     const changeHandler = (option, value) => {
-        console.log(option)
-        console.log(value)
-        console.log(updateInf[option]['setTypeValue'])
-        const newInf = updateInf
-        newInf[option]['setTypeValue'] = value
-        console.log(newInf)
-        setUpdateInf(newInf)
+        const newFieldValue = {
+            ...updateInf,
+            [option]:value
+        };
+        setUpdateInf(newFieldValue);
     }
 
     const submitHandle = async (event) => {
         event.preventDefault()
-        const data = await sendLogInf(updateInf)
-        const token = data.data.token
-        const userInf = jwt_decode(token)
-        localStorage.setItem("role", userInf[Object.keys(userInf)[1]])
-        setRole(userInf[Object.keys(userInf)[1]])
+        await sendUpdateInf(updateInf, setType, setId)
         close()
     }
 
@@ -45,7 +39,7 @@ const UpdateModal = ({ setRole, close, setId, setTypeValue, setType }) => {
         <div className="modal">
             <div ref={ref} className="modal__container_log">
                 <div className="modal_registration_label">
-                    Update form {setType}
+                    Update table {setType}
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
                     <div className="modal_input_data_container_element">
@@ -53,7 +47,7 @@ const UpdateModal = ({ setRole, close, setId, setTypeValue, setType }) => {
                         className="modal_registration_input"
                         type="text"
                         required placeholder=" Password"
-                        value={updateInf['Type']['setTypeValue']} />
+                        value={updateInf['Type']['type']} />
                     </div>
                     
                     <div className="modal_button">

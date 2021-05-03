@@ -62,7 +62,7 @@ function App() {
         <Route path="/car/:id">
           <Car role={role} />
         </Route>
-      {updateOpen && <UpdateModal setRole={setRole} close={toggleUpdate} setId={id} setTypeValue={typeValue} setType={type}/>}
+      {updateOpen && <UpdateModal setRole={setRole} close={toggleUpdate} setId={id} type={typeValue} setType={type} data={typeValue}/>}
       {loginOpen && <LogModal setRole={setRole} close={toggleLogin} />}
       {regOpen && <RegModal setRole={setRole} close={toggleReg} />}
     </Router>

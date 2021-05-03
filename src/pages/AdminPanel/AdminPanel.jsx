@@ -15,11 +15,6 @@ const AdminPanel = ({setRole, role, update}) => {
         
     }, [type])
 
-    const updateHandler = (id, typeValue) => {
-        // setId(param)
-        update(id, typeValue, type)
-      }
-
     const types = [
         {
             title: 'Carcase Types',
@@ -74,7 +69,7 @@ const AdminPanel = ({setRole, role, update}) => {
 
                             <div className="record_manager_buttons">
                                 <div className="manage_image_container">
-                                    <img onClick={() => updateHandler(el.id, el.type)} className="manage_image" src="/Pictures/Edit.png" alt="" />
+                                    <img onClick={() => update(el.id, el.type, type)} className="manage_image" src="/Pictures/Edit.png" alt="" />
                                 </div>
 
                                 <div className="manage_image_container">
