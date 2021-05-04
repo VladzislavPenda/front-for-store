@@ -3,8 +3,9 @@ import { fetchCarcaseTypes, fetchCarsListWithParam } from '../../api'
 import { fetchMarks, fetchEngineTypes, fetchDriveTypes  } from '../../api'
 import './FilterBar.scss'
 
-const Filter = ({ setCarsList }) => {
+const Filter = ({ setCarsList, setPagination}) => {
     const [params, setParams] = useState({})
+    
     const [carcaseTypesList, setCaseTypesList] = useState([])
     const [markList, setMarkList] = useState([])
     const [engineTypesList, setEngineTypesList] = useState([])
@@ -28,6 +29,7 @@ const Filter = ({ setCarsList }) => {
             setDriveTypesList(await fetchDriveTypes())
         }
         fetchDriveList()
+        fetchData()
     }, [])
 
     const setParam = (param, value) => {
@@ -37,12 +39,15 @@ const Filter = ({ setCarsList }) => {
     }
 
 
-    const useParams = () => {
+    
         const fetchData = async () => {
-            setCarsList(await fetchCarsListWithParam(params))
+            const response = await fetchCarsListWithParam(params)
+            setPagination(JSON.parse(response['responseData']))
+            console.log()
+            setCarsList(response['data'])
         }
-        fetchData()
-    }
+        
+    
 
     return (
         <div className="filters_container">
@@ -116,7 +121,7 @@ const Filter = ({ setCarsList }) => {
                 
             </div>          
             <div className="test">
-                <button onClick={useParams} className="search_button">Поиск</button>
+                <button onClick={fetchData} className="search_button">Поиск</button>
             </div>
         </div>
     )

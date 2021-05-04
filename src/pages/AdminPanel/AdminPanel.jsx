@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { fetchParams } from '../../api'
+import { deleteInf } from '../../api'
 import './AdminPanel.scss'
 
-const AdminPanel = ({setRole, role, update}) => {
+const AdminPanel = ({setRole, role, update, add}) => {
     const [type, setType] = useState('shopCarcaseType')
     // const [id, setId] = useState(1)
     const [paramList, setParamList] = useState([])
@@ -51,7 +52,7 @@ const AdminPanel = ({setRole, role, update}) => {
                     <div className="label_for_records">
                         <div className="label_text">Add new record</div>
                         <div className="manage_image_container op">
-                            <img className="manage_image" src="/Pictures/add.png" alt="" />
+                            <img onClick={() => add(type)} className="manage_image" src="/Pictures/add.png" alt="" />
                         </div>
                     </div>
                     {paramList.map(el => {
@@ -73,7 +74,7 @@ const AdminPanel = ({setRole, role, update}) => {
                                 </div>
 
                                 <div className="manage_image_container">
-                                    <img className="manage_image" src="/Pictures/delete.png" alt="" />
+                                    <img onClick={() => deleteInf(type, el.id)} className="manage_image" src="/Pictures/delete.png" alt="" />
                                 </div>
                             </div>
                         </div>

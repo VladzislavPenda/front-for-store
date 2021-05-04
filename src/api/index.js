@@ -3,14 +3,22 @@ import axios from 'axios'
 export const fetchCarsList = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopModels')
-        const header = await axios.get('https://localhost:44320/api/shopModels').then(function (response) {
-            
+        var responseData = ""
+        const  header = await axios.get('https://localhost:44320/api/shopModels').then(function (response) {
+            console.log(data)
+            console.log(response.data)
             console.log(response.status);
             console.log(response.statusText);
             console.log(response.headers['x-pagination']);
+            responseData = response.headers['x-pagination']
             console.log(response.config);
           });
-        return data;
+
+        console.log(responseData)
+        const res = JSON.parse(responseData)
+        console.log(res['TotalPages'])
+        const result = {data, responseData}
+        return result;
     } catch (error) {
         alert(error)
     }
@@ -20,6 +28,7 @@ export const fetchParams = async (param) => {
     try {
         console.log(param)
         const { data } = await axios.get(`https://localhost:44320/api/${param}`)
+        
         return data;
     } catch (error) {
         alert(error)
@@ -53,11 +62,14 @@ export const fetchCarsListWithParam = async (params) => {
     try {
         const { data } = await axios.get(url)
         let head
+        
         const header = await axios.get(url).then(function (response) {
             head = response.headers
           });
-          console.log(head['x-pagination'])  
-        return data;
+          console.log(head['x-pagination']) 
+          const responseData = head['x-pagination']
+         const result = {data, responseData}
+        return result;
     } catch (error) {
         alert(error)
     }
@@ -129,6 +141,31 @@ export const sendLogInf = async (logInf) => {
 export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     try {
         const data = await axios.put(`https://localhost:44320/api/${modifyingTable}/${id}`, updateInf)
+        return data
+    } catch (error) {
+
+        alert(Object.keys(error.response.data).reduce((acc, el) => {
+            return acc + error.response.data[el][0] + '\n'
+        }, ''))
+
+    }
+}
+
+export const deleteInf = async (modifyingTable, id) => {
+    try {
+        const data = await axios.delete(`https://localhost:44320/api/${modifyingTable}/${id}`)
+        return data
+    } catch (error) {
+
+        alert(Object.keys(error.response.data).reduce((acc, el) => {
+            return acc + error.response.data[el][0] + '\n'
+        }, ''))
+
+    }
+}
+export const addInf = async (newInf, modifyingTable) => {
+    try {
+        const data = await axios.post(`https://localhost:44320/api/${modifyingTable}`, newInf)
         return data
     } catch (error) {
 

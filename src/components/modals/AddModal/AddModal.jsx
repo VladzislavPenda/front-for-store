@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { sendUpdateInf } from '../../../api'
-import './UpdateModal.scss'
+import { addInf } from '../../../api'
+import './AddModal.scss'
 
-const UpdateModal = ({ setRole, close, setId, type, setType }) => {
+const AddModal = ({ setRole, close, setId, type, setType }) => {
     const [updateInf, setUpdateInf] = useState({
         'Type': {type}
     })
@@ -22,6 +22,7 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
     }, [ref, close, updateInf])
 
     const changeHandler = (option, value) => {
+
         const newFieldValue = {
             ...updateInf,
             [option]:value
@@ -31,7 +32,7 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
 
     const submitHandle = async (event) => {
         event.preventDefault()
-        await sendUpdateInf(updateInf, setType, setId)
+        await addInf(updateInf, setType)
         close()
     }
 
@@ -39,23 +40,22 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         <div className="modal">
             <div ref={ref} className="modal__container_log">
                 <div className="modal_registration_label">
-                    Update table {setType}
+                    Add new record {setType}
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
                     <div className="modal_input_data_container_element">
                         <input onChange={(event) => changeHandler("Type", event.target.value)} 
                         className="modal_registration_input"
                         type="text"
-                        required placeholder=" type"
-                        value={updateInf['Type']['type']} />
+                        required placeholder=" type"/>
                     </div>
                     
                     <div className="modal_button">
-                        <button className="modal_registration_account_button">Update</button>
+                        <button className="modal_registration_account_button">Create</button>
                     </div>
                 </form>
             </div>
         </div>
     )
 }
-export default UpdateModal
+export default AddModal
