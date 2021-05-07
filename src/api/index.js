@@ -4,7 +4,7 @@ export const fetchCarsList = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopModels')
         var responseData = ""
-        const  header = await axios.get('https://localhost:44320/api/shopModels').then(function (response) {
+        await axios.get('https://localhost:44320/api/shopModels').then(function (response) {
             console.log(data)
             console.log(response.data)
             console.log(response.status);
@@ -58,7 +58,7 @@ export const fetchCarsListWithParam = async (params) => {
     Object.keys(params).forEach((el) => {
         url.searchParams.set(el, params[el]);
     })
-    
+    console.log(url)
     try {
         const { data } = await axios.get(url)
         let head
@@ -140,6 +140,7 @@ export const sendLogInf = async (logInf) => {
 
 export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     try {
+        console.log(updateInf)
         const data = await axios.put(`https://localhost:44320/api/${modifyingTable}/${id}`, updateInf)
         return data
     } catch (error) {

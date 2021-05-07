@@ -1,13 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { sendUpdateInf } from '../../../api'
-import './UpdateModal.scss'
+import './UpdateMarkModal.scss'
 
-const UpdateModal = ({ setRole, close, setId, type, setType }) => {
+const UpdateMarkModels = ({ setRole, close, setId, type, setType, markName, country }) => {
     const [updateInf, setUpdateInf] = useState({
-        'Type': {type}
+        'MarkNum': {markName},
+        'Country':  {country}
     })
 
     const ref = useRef(null)
+
+    useEffect(() => {
+        console.log(country)
+        console.log(updateInf)
+    }, [])
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -17,7 +23,6 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref, close, updateInf])
@@ -27,11 +32,14 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
             ...updateInf,
             [option]:value
         };
+        console.log(value)
         setUpdateInf(newFieldValue);
     }
 
     const submitHandle = async (event) => {
         event.preventDefault()
+        console.log(setId)
+        console.log(setType)
         await sendUpdateInf(updateInf, setType, setId)
         close()
     }
@@ -40,15 +48,22 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         <div className="modal">
             <div ref={ref} className="modal__container_log">
                 <div className="modal_registration_label">
-                    Update table {setType}
+                    table model {setType}
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
                     <div className="modal_input_data_container_element">
-                        <input onChange={(event) => changeHandler("Type", event.target.value)} 
+                        <input onChange={(event) => changeHandler("MarkNum", event.target.value)} 
                         className="modal_registration_input"
                         type="text"
                         required placeholder=" type"
-                        value={updateInf['Type']['type']} />
+                        value={updateInf['MarkNum']['markName']} />
+                    </div>
+                    <div className="modal_input_data_container_element">
+                        <input onChange={(event) => changeHandler("Country", event.target.value)} 
+                        className="modal_registration_input"
+                        type="text"
+                        required placeholder=" type"
+                        value={updateInf['Country']['country']} />
                     </div>
                     
                     <div className="modal_button">
@@ -59,4 +74,4 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         </div>
     )
 }
-export default UpdateModal
+export default UpdateMarkModels

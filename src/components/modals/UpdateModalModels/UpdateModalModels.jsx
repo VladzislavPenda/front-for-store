@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { sendUpdateInf } from '../../../api'
-import './UpdateModal.scss'
+import './UpdateModalModels.scss'
 
-const UpdateModal = ({ setRole, close, setId, type, setType }) => {
+const UpdateModalModels = ({ setRole, close, setId, type, setType }) => {
     const [updateInf, setUpdateInf] = useState({
         'Type': {type}
     })
 
     const ref = useRef(null)
+
+    useEffect(() => {
+        console.log(123)
+    }, [])
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -17,7 +21,6 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         }
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
-
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref, close, updateInf])
@@ -40,7 +43,7 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
         <div className="modal">
             <div ref={ref} className="modal__container_log">
                 <div className="modal_registration_label">
-                    Update table {setType}
+                    table model {setType}
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
                     <div className="modal_input_data_container_element">
@@ -52,11 +55,11 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
                     </div>
                     
                     <div className="modal_button">
-                        <button className="modal_registration_account_button">Update</button>
+                        <button className="modal_registration_account_button">Update2</button>
                     </div>
                 </form>
             </div>
         </div>
     )
 }
-export default UpdateModal
+export default UpdateModalModels
