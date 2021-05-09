@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react';
 import RegModal from './components/modals/RegModal/RegModal';
 import LogModal from './components/modals/LogModal/LogModal';
 import AddModal from './components/modals/AddModal/AddModal';
+import AddMarkModal from './components/modals/AddMarkModal/AddMarkModal';
+import AddModelModal from './components/modals/AddModelModal/AddModelModal';
 import UpdateModal from './components/modals/UpdateModal/UpdateModal';
 import UpdateModalModels from './components/modals/UpdateModalModels/UpdateModalModels';
 import UpdateMarkModal from './components/modals/UpdateMarkModal/UpdateMarkModal';
@@ -34,8 +36,20 @@ function App() {
   const [markName, setMarkName] = useState(false)
   const [country, setCountry] = useState(false)
   const [addOpen, setAddOpen] = useState(false)
+  const [addMarkOpen, setAddMarkOpen] = useState(false)
+  const [addModelOpen, setAddModelOpen] =useState(false)
   const [params, setParams] = useState({})
   const [currentPage, setCurrentPage] = useState(1)
+  const [fullModelInfo, setFullModelInfo] = useState({
+    "model": "",
+    "year": "",
+    "horsePower": "",
+    "price" : "",
+    "mileAge" : "",
+    "phoneNumber": "",
+    "description": "",
+    "pathToPicture": ""
+  })
 
 
   useEffect(() => {
@@ -66,14 +80,19 @@ function App() {
     setRegOpen(!regOpen)
   }
 
-  const toggleUpdate = (id, typeValue, type, marknum, country) => {
+  const toggleUpdate = (id, typeValue, type, marknum, country, el) => {
     setId(id)
+    console.log(el)
+    console.log(marknum)
     setTypeValue(typeValue)
     setType(type)
     console.log(type)
     if (type === "shopModels")
     {
+      setId(el.modelId)
       console.log("yeap")
+      setFullModelInfo(el)
+      console.log(fullModelInfo)
       setUpdateModelOpen(!updateModelOpen)
     }
     else if(type === "shopMark")
@@ -92,13 +111,31 @@ function App() {
     setUpdateMarksOpen(!updateMarksOpen)
   }
 
+  const toggleAddMarkClose = () => {
+    setAddMarkOpen(!addMarkOpen)
+  }
+
+  const toggleAddModelClose = () =>{
+    setAddModelOpen(!addModelOpen)
+  }
   const toggleUpdateModelClose = () => {
     setUpdateModelOpen(!updateModelOpen)
   }
 
   const toggleAdd = (type) => {
     setType(type)
-    setAddOpen(!addOpen)
+    if (type === "shopMark")
+    {
+      console.log("not")
+      setAddMarkOpen(!addMarkOpen)
+    }
+    else if(type === "shopModels"){
+      setAddModelOpen(!addModelOpen)
+    }
+    else{
+      setAddOpen(!addOpen)
+    }
+
   }
   
   return (
@@ -121,15 +158,19 @@ function App() {
         setType={type} 
         data={typeValue} 
         markName={markName} 
-        country={country}/>} 
+        country={country}
+        fullModelInfo={fullModelInfo}/>} 
       {updateModelOpen && <UpdateModalModels
         setRole={setRole}
         close={toggleUpdateModelClose} 
         setId={id} type={typeValue} 
         setType={type} 
-        data={typeValue}/>}
+        data={typeValue}
+        fullModelInfo={fullModelInfo}/>}
       {updateOpen && <UpdateModal setRole={setRole} close={toggleUpdate} setId={id} type={typeValue} setType={type} data={typeValue}/>}
       {addOpen && <AddModal setRole={setRole} close={toggleAdd} setId={id} type={typeValue} setType={type} data={typeValue}/>}
+      {addMarkOpen && <AddMarkModal setRole={setRole} close={toggleAddMarkClose} setId={id} type={typeValue} setType={type} data={typeValue}/>}
+      {addModelOpen && <AddModelModal setRole={setRole} close={toggleAddModelClose} setId={id} type={typeValue} setType={type} data={typeValue}/>}
       {loginOpen && <LogModal setRole={setRole} close={toggleLogin} />}
       {regOpen && <RegModal setRole={setRole} close={toggleReg} />}
     </Router>

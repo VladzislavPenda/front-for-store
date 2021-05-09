@@ -9,17 +9,15 @@
     top: 0;
 }
 
-.modal__container_logs {
+.modal__container_log {
     background-color: white;
     width: 500px;
-    height: 600px;
-    
+    height: 300px;
     border-radius: 20px;
     -webkit-box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
     background-color: rgb(235, 250, 252);
-    
 }
 
 .modal_registration_label {
@@ -41,17 +39,6 @@
     margin-left: 10px;
     margin-right: 10px;
     flex-wrap: wrap;
-}
-
-.modal_description_input{
-    width: 250px;
-    height: 120px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding-left: 10px;
-    outline: none;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
 }
 
 .modal_registration_input {

@@ -1,27 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { sendUpdateInf } from '../../../api'
-import './UpdateMarkModal.scss'
+import { addInf } from '../../../api'
+import './AddMarkModal.scss'
 
-const UpdateMarkModels = ({ setRole, close, setId, type, setType, markName, country }) => {
+const AddMarkModal = ({ setRole, close, setId, type, setType, markName, country }) => {
     const [updateInf, setUpdateInf] = useState({
         'MarkNum': {markName},
         'Country':  {country}
     })
-    // const [updateInf2, setUpdateInf2] = useState({
-    //     markName,
-    //     country
-    // })
-    const [updateInfNorm, setUpdateInfNorm] = useState({
-        'MarkNum': updateInf['MarkNum']['markName'],
-        'Country': updateInf['Country']['country']
-    })
 
     const ref = useRef(null)
-
-    useEffect(() => {
-        console.log(country)
-        console.log(updateInf)
-    }, [])
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -33,29 +20,20 @@ const UpdateMarkModels = ({ setRole, close, setId, type, setType, markName, coun
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [ref, close, updateInf, updateInfNorm])
+    }, [ref, close, updateInf])
 
     const changeHandler = (option, value) => {
+
         const newFieldValue = {
             ...updateInf,
             [option]:value
         };
-        const newFieldNormValue = {
-            ...updateInfNorm,
-            [option]:value
-        };
-        
-        console.log(newFieldValue)
-        console.log(updateInfNorm)
-        setUpdateInf(newFieldValue)
-        setUpdateInfNorm(newFieldNormValue)
+        setUpdateInf(newFieldValue);
     }
 
     const submitHandle = async (event) => {
         event.preventDefault()
-        console.log(setId)
-        console.log(setType)
-        await sendUpdateInf(updateInfNorm, setType, setId)
+        await addInf(updateInf, setType)
         close()
     }
 
@@ -63,30 +41,29 @@ const UpdateMarkModels = ({ setRole, close, setId, type, setType, markName, coun
         <div className="modal">
             <div ref={ref} className="modal__container_log">
                 <div className="modal_registration_label">
-                    table model {setType}
+                    Add new record {setType}
                 </div>
                 <form onSubmit={submitHandle} className="modal_input_data_container">
                     <div className="modal_input_data_container_element">
                         <input onChange={(event) => changeHandler("MarkNum", event.target.value)} 
                         className="modal_registration_input"
                         type="text"
-                        required placeholder=" type"
-                        value={updateInf['MarkNum']['markName']} />
+                        required placeholder=" type"/>
                     </div>
+
                     <div className="modal_input_data_container_element">
                         <input onChange={(event) => changeHandler("Country", event.target.value)} 
                         className="modal_registration_input"
                         type="text"
-                        required placeholder=" type"
-                        value={updateInf['Country']['country']} />
+                        required placeholder=" type"/>
                     </div>
                     
                     <div className="modal_button">
-                        <button className="modal_registration_account_button">Update</button>
+                        <button className="modal_registration_account_button">Create2</button>
                     </div>
                 </form>
             </div>
         </div>
     )
 }
-export default UpdateMarkModels
+export default AddMarkModal

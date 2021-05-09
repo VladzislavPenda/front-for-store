@@ -1,4 +1,4 @@
-.modal {
+.modals {
     width: 100vw;
     height: 100vh;
     background-color: #0d0d0d28;
@@ -9,10 +9,10 @@
     top: 0;
 }
 
-.modal__container_logs {
+.modal__container_login {
     background-color: white;
-    width: 500px;
-    height: 600px;
+    width: 700px;
+    height: 800px;
     
     border-radius: 20px;
     -webkit-box-shadow: 0px 0px 16px 1px rgba(0, 0, 0, 0.75);
@@ -33,6 +33,12 @@
 
 .modal_input_data_container {
     display: block;
+}
+
+.input_modal_string{
+    justify-content: center;
+    margin: auto;
+    display: flex;
 }
 
 .modal_input_data_container_element {

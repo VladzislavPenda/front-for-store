@@ -96,7 +96,7 @@ const AdminPanel = ({setRole, role, update, add}) => {
                                 </div>
                                 <div className="record_manager_buttons">
                                     <div className="manage_image_container">
-                                       <img onClick={() => update(el.id, el.type, type)} className="manage_image" src="/Pictures/Edit.png" alt="" />
+                                       <img onClick={() => update(el.id, el.type, type, "", "", el)} className="manage_image" src="/Pictures/Edit.png" alt="" />
                                     </div>
     
                                     <div className="manage_image_container">
@@ -118,7 +118,7 @@ const AdminPanel = ({setRole, role, update, add}) => {
     
                                 <div className="record_manager_buttons">
                                     <div className="manage_image_container">
-                                        <img onClick={() => update(el.id, el.type, type, el.markNum, el.country)} className="manage_image" src="/Pictures/Edit.png" alt="" />
+                                        <img onClick={() => update(el.id, el.type, type, el.markNum, el.country, el)} className="manage_image" src="/Pictures/Edit.png" alt="" />
                                     </div>
     
                                     <div className="manage_image_container">

@@ -27,6 +27,7 @@ const UpdateModal = ({ setRole, close, setId, type, setType }) => {
             ...updateInf,
             [option]:value
         };
+        console.log(newFieldValue)
         setUpdateInf(newFieldValue);
     }
 

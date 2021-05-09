@@ -90,6 +90,15 @@ export const fetchCarcaseTypes = async () => {
     }
 }
 
+export const fetchTransmissionTypes = async () => {
+    try {
+        const { data } = await axios.get('https://localhost:44320/api/shopTransmissionType')
+        return data;
+    } catch (error) {
+        alert(error)
+    }
+}
+
 // подгрузка всех марок, которые существуют в бд
 export const fetchMarks = async () => {
     try {
@@ -153,6 +162,30 @@ export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     try {
         console.log(updateInf)
         const data = await axios.put(`https://localhost:44320/api/${modifyingTable}/${id}`, updateInf)
+        return data
+    } catch (error) {
+
+        alert(Object.keys(error.response.data).reduce((acc, el) => {
+            return acc + error.response.data[el][0] + '\n'
+        }, ''))
+
+    }
+}
+
+export const AddModel = async (updateInf, modifyingTable, id) => {
+    try {
+        console.log(updateInf)
+        const body = {
+            "model": updateInf.model,
+            "year": updateInf.year,
+            "horsePower": updateInf.horsePower,
+            "price" : updateInf.price,
+            "mileAge" : updateInf.mileAge,
+            "phoneNumber": updateInf.phoneNumber,
+            "description": updateInf.description,
+            "pathToPicture": updateInf.pathToPicture
+        }
+        const data = await axios.post(`https://localhost:44320/api/${modifyingTable}/ShopMark/${updateInf.markName}/ShopEngine/${updateInf.engineType}/ShopCarcaseType/${updateInf.carcaseType}/ShopDriveType/${updateInf.driveType}/ShopTransmission/${updateInf.transmissionType}/models`, body)
         return data
     } catch (error) {
 
