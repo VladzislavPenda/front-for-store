@@ -122,7 +122,12 @@ function App() {
         data={typeValue} 
         markName={markName} 
         country={country}/>} 
-      {updateModelOpen && <UpdateModalModels setRole={setRole} close={toggleUpdateModelClose} setId={id} type={typeValue} setType={type} data={typeValue}/>}
+      {updateModelOpen && <UpdateModalModels
+        setRole={setRole}
+        close={toggleUpdateModelClose} 
+        setId={id} type={typeValue} 
+        setType={type} 
+        data={typeValue}/>}
       {updateOpen && <UpdateModal setRole={setRole} close={toggleUpdate} setId={id} type={typeValue} setType={type} data={typeValue}/>}
       {addOpen && <AddModal setRole={setRole} close={toggleAdd} setId={id} type={typeValue} setType={type} data={typeValue}/>}
       {loginOpen && <LogModal setRole={setRole} close={toggleLogin} />}

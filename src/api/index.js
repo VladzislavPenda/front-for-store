@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// получаем данные при загрузке главной странице, параметров никаких нет
 export const fetchCarsList = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopModels')
@@ -24,6 +25,7 @@ export const fetchCarsList = async () => {
     }
 }
 
+// пхд бесполезный метод, не нашел где он применяется
 export const fetchParams = async (param) => {
     try {
         console.log(param)
@@ -35,6 +37,7 @@ export const fetchParams = async (param) => {
     }
 }
 
+// получаем данные о машинке по id
 export const fetchCar = async (id) => {
     try {
         const { data } = await axios.get(`https://localhost:44320/api/shopModels/${id}`)
@@ -44,6 +47,7 @@ export const fetchCar = async (id) => {
     }
 }
 
+// берем похожие по каркасу машины для отрисовки их в разделе "похожие авто"
 export const fetchSameCars = async (carcase) => {
     try {
         const { data } = await axios.get(`https://localhost:44320/api/shopModels?carcaseType=${carcase}&pageSize=5`)
@@ -53,6 +57,7 @@ export const fetchSameCars = async (carcase) => {
     }
 }
 
+// запрос с параметрами из фильтра
 export const fetchCarsListWithParam = async (params) => {
     let url = new URL('https://localhost:44320/api/shopModels');
     Object.keys(params).forEach((el) => {
@@ -75,6 +80,7 @@ export const fetchCarsListWithParam = async (params) => {
     }
 }
 
+// подгрузка всех кузовов, которые существуют в бд
 export const fetchCarcaseTypes = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopCarcaseType')
@@ -84,6 +90,7 @@ export const fetchCarcaseTypes = async () => {
     }
 }
 
+// подгрузка всех марок, которые существуют в бд
 export const fetchMarks = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopMark')
@@ -93,6 +100,7 @@ export const fetchMarks = async () => {
     }
 }
 
+// подгрузка всех движков, которые существуют в бд
 export const fetchEngineTypes = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopEngineType')
@@ -102,6 +110,7 @@ export const fetchEngineTypes = async () => {
     }
 }
 
+// подгрузка всех приводов, которые существуют в бд
 export const fetchDriveTypes = async () => {
     try {
         const { data } = await axios.get('https://localhost:44320/api/shopDriveType')
@@ -111,7 +120,7 @@ export const fetchDriveTypes = async () => {
     }
 }
 
-
+// отправка запроса на регистрацию
 export const sendRegInf = async (regInf) => {
     try {
         const data = await axios.post("https://localhost:44320/api/authentication", regInf)
@@ -125,6 +134,7 @@ export const sendRegInf = async (regInf) => {
     }
 }
 
+// отправка запроса на логин
 export const sendLogInf = async (logInf) => {
     try {
         const data = await axios.post("https://localhost:44320/api/authentication/login", logInf)
@@ -138,6 +148,7 @@ export const sendLogInf = async (logInf) => {
     }
 }
 
+// отправка запроса на редактирование записей бд
 export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     try {
         console.log(updateInf)
@@ -152,6 +163,7 @@ export const sendUpdateInf = async (updateInf, modifyingTable, id) => {
     }
 }
 
+// отправка запроса на удаление из бд записи
 export const deleteInf = async (modifyingTable, id) => {
     try {
         const data = await axios.delete(`https://localhost:44320/api/${modifyingTable}/${id}`)
@@ -164,6 +176,8 @@ export const deleteInf = async (modifyingTable, id) => {
 
     }
 }
+
+// запрос на добавление записи в бд
 export const addInf = async (newInf, modifyingTable) => {
     try {
         const data = await axios.post(`https://localhost:44320/api/${modifyingTable}`, newInf)
