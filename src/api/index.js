@@ -129,6 +129,15 @@ export const fetchDriveTypes = async () => {
     }
 }
 
+export const getFile = async () => {
+    try {
+        const { data } = await axios.get('https://localhost:44320/api/file')
+        return data;
+    } catch (error) {
+        alert(error)
+    }
+}
+
 // отправка запроса на регистрацию
 export const sendRegInf = async (regInf) => {
     try {
@@ -199,6 +208,7 @@ export const AddModel = async (updateInf, modifyingTable, id) => {
 // отправка запроса на удаление из бд записи
 export const deleteInf = async (modifyingTable, id) => {
     try {
+        console.log(id)
         const data = await axios.delete(`https://localhost:44320/api/${modifyingTable}/${id}`)
         return data
     } catch (error) {

@@ -1,0 +1,19 @@
+.footer-container {
+    border-top: cadetblue solid 1px;
+    margin-top: 12vh;
+    height: 5vh;
+    background-color: rgb(191, 206, 255);
+    margin-bottom: 1px;
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+.elem1, .elem2 {
+    margin: 10px;
+}
+
+.elem1:hover{
+  cursor: pointer;
+}
+

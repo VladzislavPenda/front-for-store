@@ -6,6 +6,7 @@ import {
   Route
 } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 import Main from './pages/Main/Main';
 import { useEffect, useState } from 'react';
 import RegModal from './components/modals/RegModal/RegModal';
@@ -140,7 +141,7 @@ function App() {
   
   return (
     <Router>
-      <NavBar setRole={setRole} role={role} reg={toggleReg} login={toggleLogin}/>
+      <NavBar setRole={setRole} role={role} reg={toggleReg} login={toggleLogin} add={toggleAdd}/>
         <Route path="/" exact>
           <Main currentPage={currentPage} setCurrentPage={setCurrentPage} pagination={pagination} setPagination={setPagination} params={params} setParams={setParams} carsList={carsList} setCarsList={setCarsList} pagination={pagination} setPagination={setPagination}/>
         </Route>
@@ -150,6 +151,7 @@ function App() {
         <Route path="/car/:id">
           <Car role={role} />
         </Route>
+      <Footer />
       {updateMarksOpen && <UpdateMarkModal 
         setRole={setRole}
         close={toggleUpdateMarkClose} 

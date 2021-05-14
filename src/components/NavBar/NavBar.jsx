@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './NavBar.scss'
 
-const NavBar = ({ setRole, role, reg, login }) => {
+const NavBar = ({ setRole, role, reg, login, add}) => {
 
     const exit = () => {
         setRole('')
@@ -26,7 +26,7 @@ const NavBar = ({ setRole, role, reg, login }) => {
                         role === "User"
                             ?
                             <div className="navbar__login">
-                                <b className="navbar__button">Basket</b>
+                                <b onClick={() => add("shopModels")} className="navbar__button">Create new</b>
                                 <b onClick={exit} className="navbar__button">Exit</b>
                             </div>
                             :

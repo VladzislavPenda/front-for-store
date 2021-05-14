@@ -54,6 +54,7 @@ const Car = ({ role }) => {
                             <p>Двигатель: {carsList.engineType}</p>
                             <p>Пробег: {carsList.mileAge} км</p>
                             <p>Тип кузова: {carsList.carcaseType}</p>
+                            <p>Номер продавца: {carsList.phoneNumber}</p>
                         </div>
                         {
                             <div className="basket-button">Добавить в корзину</div>

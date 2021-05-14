@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { fetchParams } from '../../api'
-import { deleteInf } from '../../api'
+import { deleteInf, getFile } from '../../api'
 import './AdminPanel.scss'
 
 const AdminPanel = ({setRole, role, update, add}) => {
@@ -59,6 +59,7 @@ const AdminPanel = ({setRole, role, update, add}) => {
                     {types.map(el => {
                         return <div className="ap__type_element" onClick={() => setType(el.path)}><div className="ap_type_text">{el.title}</div></div>
                     })}
+                    <div className="ap__type_element" onClick={() => getFile()}><div className="ap_type_text">Download file</div></div>
                 </div>
                 <div className="ap__var">
                     <div className="label_for_records">
@@ -100,7 +101,7 @@ const AdminPanel = ({setRole, role, update, add}) => {
                                     </div>
     
                                     <div className="manage_image_container">
-                                        <img onClick={() => deleteInf(type, el.id)} className="manage_image" src="/Pictures/delete.png" alt="" />
+                                        <img onClick={() => deleteInf(type, el.modelId)} className="manage_image" src="/Pictures/delete.png" alt="" />
                                     </div>
                                 </div>
                             </div>

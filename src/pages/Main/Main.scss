@@ -12,8 +12,16 @@
     padding: 10px;
 }
 
+.page_buttons {
+    width: 40px;
+    height: 40px;
+    background: rgb(241, 234, 234);
+    border: rgb(190, 187, 175) solid 1px;
+}
+
 .buttons-page-container{
-    display: flex
+    display: flex;
+    justify-content: center;
 }
 
 @media screen and (max-width: 1200px) {

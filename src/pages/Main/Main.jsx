@@ -24,13 +24,14 @@ const Main = ({currentPage, setCurrentPage, carsList, setCarsList, params, setPa
                         id="pageButton" 
                         value={i} 
                         onClick={(e) => setCurrentPage(e.target.value)}
+                        className="page_buttons"
                         style={{
-                            background: 'blue'
+                            background: 'rgb(107, 96, 96)'
                         }}
                     >{i}</button>
                 )
             } else {
-                content.push(<button id="pageButton" value={i} onClick={(e) => pageHandler(e.target.value)}>{i}</button>)
+                content.push(<button className="page_buttons" id="pageButton" value={i} onClick={(e) => pageHandler(e.target.value)}>{i}</button>)
             }
             
         }
@@ -47,7 +48,6 @@ const Main = ({currentPage, setCurrentPage, carsList, setCarsList, params, setPa
                 <div className="buttons-page-container">
                     {pageButtons()}
                 </div>
-                <div>{pagination["CurrentPage"]} {pagination["TotalPages"]}</div>
             </div>
             <Filter pageHandler={pageHandler} setCurrentPage={setCurrentPage} params={params} setParams={setParams} setCarsList={setCarsList} pagination={pagination} setPagination={setPagination} />
         </div>
